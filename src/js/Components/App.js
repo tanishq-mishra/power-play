@@ -7,7 +7,6 @@ function App() {
     })
     return (
         <div id="player-container">
-
             <video id="player" src={file} controls={true} />
         </div>
     )
