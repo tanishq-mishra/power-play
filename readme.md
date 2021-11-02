@@ -1,6 +1,6 @@
 # PowerPlay
 
-PowerPlay is a Cross-Platform media player based on Electron. 
+PowerPlay is a Cross-Platform media player based on Electron, focused on smooth playback, seeking, speed controls etc.
 > Supported video formats include 
 > * *.mp4 
 > * *.mkv
