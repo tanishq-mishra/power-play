@@ -45,7 +45,7 @@ function createWindow() {
                     click() {
                         dialog.showOpenDialog({
                             properties: ['openFile'],
-                            filters: [{ name: 'Movies', extensions: ['mkv', 'mp4', 'avi', 'webm', 'mov', 'flv'] }]
+                            filters: [{ name: 'Movies', extensions: ['mkv', 'mp4', 'webm', 'mov'] }]
                         }).then(file => {
                             if (!file) return
                             else {
