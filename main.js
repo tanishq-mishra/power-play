@@ -8,16 +8,14 @@ function createWindow() {
         width: 1200,
         height: 800,
         backgroundColor: "black",
+        autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true,
             worldSafeExecuteJavaScript: false,
             contextIsolation: false,
         }
     })
-    const openFile = () => {
 
-
-    }
     let menu = Menu.buildFromTemplate([
         // { role: 'appMenu' }
         ...(isMac ? [{
@@ -53,6 +51,19 @@ function createWindow() {
                             }
                         })
 
+                    }
+                },
+                {
+                    label: "Toggle Full Screen",
+                    click: () => {
+                        if (win.isFullScreen()) {
+                            win.setFullScreen(false)
+                            // win.setAutoHideMenuBar(false)
+
+                        } else {
+                            // win.setAutoHideMenuBar(true)
+                            win.setFullScreen(true)
+                        }
                     }
                 }
             ]
@@ -146,7 +157,3 @@ ipcMain.on('notify', (_, message) => {
 })
 
 app.whenReady().then(createWindow)
-
-
-// open File 
-
