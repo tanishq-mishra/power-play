@@ -16,6 +16,8 @@ function App() {
 
     ipcRenderer.on('open-file', (event, message) => {
         setFile(message.filePaths[0])
+        
+        document.title = message.filePaths[0]
     })
     return (
         <div id="player-container"
