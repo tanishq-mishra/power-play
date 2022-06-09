@@ -35,7 +35,6 @@ function App() {
                 if (isValidFile) {
                     setFile(droppedFile[0].path);
                 }
-
             }}
             onMouseMove={(e) => {
                 if (hideControls === true) {
@@ -49,6 +48,7 @@ function App() {
             }}
 
         >
+
             <SpeedIndicator speed={speed} hidden={hideControls} />
             <video id="player" src={file} controls={true}
                 onKeyDown={(e) => {

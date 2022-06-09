@@ -1,5 +1,6 @@
 {
   "name": "power-play",
+  "homepage": "./",
   "version": "1.0.0",
   "description": "Media Play for Power users",
   "main": "main.js",
@@ -22,17 +23,28 @@
   },
   "scripts": {
     "start": "electron .",
-    "watch": "webpack --config webpack.common.js --watch"
+    "watch": "webpack --config webpack.common.js --watch",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "build": {
+    "fileAssociations": [
+      {
+        "ext": "mp4",
+        "name": "MP4 File",
+        "role": "Player"
+      },
+      {
+        "ext": "mkv",
+        "name": "MKV File",
+        "role": "Player"
+      }
+    ],
     "appId": "com.tmishra.app",
-    "productName": "Power Play",
-    "directory": {
-      "output": "dist"
-    }
+    "productName": "Power Play"
   }
 }
