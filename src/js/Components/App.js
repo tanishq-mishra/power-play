@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { ipcRenderer } from 'electron'
 import SpeedIndicator from './SpeedIndicator';
 function App() {
     const [file, setFile] = useState(null);
@@ -14,13 +13,29 @@ function App() {
         }
     }, [speed])
 
-    ipcRenderer.on('open-file', (event, message) => {
+    window.api.openFile((event, message) => {
         setFile(message.filePaths[0])
-        
+
         document.title = message.filePaths[0]
     })
     return (
         <div id="player-container"
+            onDragOver={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+
+            }}
+            onDrop={async (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                const droppedFile = e.dataTransfer.files;
+
+                const isValidFile = await window.api.isValidFile(droppedFile[0].path);
+                console.log(isValidFile);
+                if (isValidFile) {
+                    setFile(droppedFile[0].path);
+                }
+            }}
             onMouseMove={(e) => {
                 if (hideControls === true) {
                     setHideControls(false)
@@ -33,6 +48,7 @@ function App() {
             }}
 
         >
+
             <SpeedIndicator speed={speed} hidden={hideControls} />
             <video id="player" src={file} controls={true}
                 onKeyDown={(e) => {

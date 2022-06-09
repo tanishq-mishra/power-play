@@ -1,5 +1,6 @@
 const { BrowserWindow, app, ipcMain, Notification, dialog, Menu, webContents } = require('electron');
 const path = require('path');
+const { lstatSync } = require("fs");
 
 const isMac = process.platform === 'darwin'
 const isDev = !app.isPackaged;
@@ -10,9 +11,10 @@ function createWindow() {
         backgroundColor: "black",
         autoHideMenuBar: true,
         webPreferences: {
-            nodeIntegration: true,
+            preload: path.join(__dirname + "/preload.js"),
+            nodeIntegration: false,
             worldSafeExecuteJavaScript: false,
-            contextIsolation: false,
+            contextIsolation: true,
         }
     })
 
@@ -157,3 +159,8 @@ ipcMain.on('notify', (_, message) => {
 })
 
 app.whenReady().then(createWindow)
+
+
+ipcMain.handle("is-valid-file", async (_, path) => {
+    return lstatSync(path).isFile();
+})
